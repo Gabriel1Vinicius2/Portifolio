@@ -1,0 +1,501 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;/*Serve para que o valor decedido não seza aumentado por exemplo pelo padding*/
+    scroll-behavior: smooth; /*A rolagem fica mais suave na pagina*/
+    border: none;
+    outline: none;
+
+}
+:root{/*é utilizada para selecionar o elemento raiz do documento HTML, ou seja, o elemento HTML*/
+    --main-color: #0C4A6E;
+    --text-color: #fff;
+    --bg-color: #000;
+    --bg-cinza: #292929;
+    --bg-clara: #BFDBFE;
+}
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+body{
+    background-color: var(--bg-color);
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--text-color);
+}
+
+/*Parte do menu*/
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 3rem 9%;
+    background-color: rgb(0, 0, 0, 0.7);
+    filter: drop-shadow(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.logo{
+    font-size: 3rem;
+    color: var(--main-color);
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.logo:hover{
+    transform: scale(1.1);
+}
+.navbar a{
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-left: 4rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.navbar a:hover,
+.navbar a.active{
+    color: var(--main-color);
+    border-bottom: 3px solid var(--main-color);
+}
+#menu-icon{
+    font-size: 3.6rem;
+    color: var(--main-color);
+    display: none;
+}
+@media (max-width:995px){
+    #menu-icon{
+        display: block;
+    }
+    .navbar{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 40%;
+        border-left: 3px solid var(--main-color);
+        border-bottom: 3px solid var(--main-color);
+        border-bottom-left-radius: 2rem;
+        padding: 1rem 3%;
+        background-color: #F0F9FF;
+        border-top: 0.1rem solid rgba(0,0,0,0.1);
+        display: none;
+    }
+    .navbar .active{
+        display: block;
+    }
+    .navbar a{
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+    }
+    .navbar a:hover,
+    .navbar a.active{
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.rem solid var(--main-color);
+    }
+}
+
+/*Home section*/
+
+section{
+    min-height: 100vh;
+    padding: 5rem 9% 5rem;
+}
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    background: var(--bg-color);
+}
+
+.home .home-content h1{
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+span{
+    color: var(--main-color);
+}
+
+.home-img{
+    border-radius: 50%;
+}
+
+.home-img img{
+    position: relative;
+    width: 32vw;
+    border-radius: 50%;
+    box-shadow: 0 0 25px var(--main-color);
+    cursor: pointer;
+}
+
+.home-img img:hover{
+    transform: scale(1.01);
+    filter: drop-shadow(0 0 25px var(--main-color));
+}
+.home-content h3{
+    font-size: 4rem;
+    margin-bottom: 1rem; 
+    font-weight: 700;
+}
+.home-content p{
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.social-icon a{
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border: 0.2rem solid var(--main-color);
+    font-size: 2rem;
+    border-radius: 50%;
+    color: var(--main-color);
+    margin: 3rem 1.5rem 3rem 0;
+    transition: 0.3s ease;
+}
+
+.social-icon a:hover{
+    color: white;
+    transform: scale(1.3) translateY(-5px);
+    background: var(--main-color);
+    box-shadow: 0 0 25px var(--main-color);
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: var(--bg-color);
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    transform: scale(1.03);
+    background-color: var(--main-color);
+    color: var(--text-color);
+    box-shadow: 0 0 25px var(--main-color);
+}
+
+.digitando-texto{
+    font-size: 30px;
+    font-weight: 600;
+    min-width: 280px;
+}
+
+.digitando-texto span{
+    position: relative;
+}
+
+.digitando-texto span::before{
+    content: "";
+    color: var(--main-color);
+    animation: palavras 25s infinite;
+    white-space: nowrap;/*Para não ter quebra de linha e quebrar a animação do digitando*/
+}
+.digitando-texto span::after{
+    content: "";
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 100%;
+    border-left: 3px solid var(--main-color);
+    right: -8px;
+    animation: cursor .7s infinite, digitando 25s steps(15) infinite ;
+    background-color: #000;
+}
+
+@keyframes palavras{
+    0%, 20%{
+        content: "Desenvolvedor Web";
+    }
+    21%, 40%{
+        content: "Desenvolvedor Software";
+    }
+    41%, 60%{
+        content: "Web Designer";
+    }
+    61%, 80%{
+        content: "Estudante";
+    }
+    81%, 100%{
+        content: "Lorem ipsu";
+    }
+}
+@keyframes cursor{
+    0%{
+        border-left: 3px solid var(--main-color);
+    }
+}
+@keyframes digitando{
+    10%, 15%, 
+    30%, 35%, 
+    50%, 55%, 
+    70%, 75%, 
+    90%, 95% {
+        width: 0;
+    }
+    5%, 20%, 
+    25%, 40%, 
+    45%, 60%, 
+    65%, 80%, 85% {
+        width: calc(100% + 8px);
+    }
+    
+}
+@media (max-width:1000px){
+    .home{
+        gap: 4rem;
+    }
+}
+@media (max-width:995px){
+    .home{
+        flex-direction: column;
+        margin: 5rem 4rem;
+    }
+    .home .home-content h3{
+        font-size: 2.5rem;
+    }
+    .home-content h1{
+        font-size: 5rem;
+    }
+    .home-img img{
+        width: 70vw;
+        margin-top: 4rem;
+    }
+
+}
+
+/*Skills section*/
+.cabecalho{
+    font-size: 5rem;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.5rem;
+}
+.skills {
+    display: block;
+    background: var(--bg-cinza);
+}
+
+.skills .container{
+    background: #F0F9FF;
+    color: var(--bg-clara);
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 90%;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.skills .container .row{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    flex-wrap: wrap;
+    gap: 1.8rem;
+}
+
+.skills .container .bar{
+    margin-bottom: 15px;
+    border-radius: 1rem;
+    background: var(--bg-color);
+    transition:0.3s ease;
+}
+.skills .container .bar:hover{
+    box-shadow: 0px 10px 25px var(--main-color);
+    transform: scale(1.03);
+}
+.skills .container .bar .info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.skills .container .bar .info::before{
+    position: absolute;
+    content: "";
+    width: 50%;
+    height:500%;
+    margin-top: -30%;
+    background: var(--main-color);
+    transform: rotate(45deg);
+
+}
+.skills .container .bar .info:hover::before{
+    animation: animatebar 3.2s linear infinite;
+}
+
+@keyframes animatebar{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+.skills .container .bar .info::after{
+    position: absolute;
+    content: "";
+    inset: 5px;
+    background: var(--bg-color);
+    border-radius: 1rem;
+}
+.skills .container .bar .info img{
+    z-index: 10;
+}
+.skills .container .bar .info span{
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    font-family: 'Courier New';
+    z-index: 10;
+}
+
+@media screen and (max-width:600px){
+    .skills .container{
+        padding: 1rem;
+        margin-top: 5px;
+        width: 100%;
+    }
+
+}
+/* section projetos */
+
+
+.projetos .container-slide{
+    border-radius: 2rem;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 3rem;
+}
+
+/*Section de Contato*/
+.contato h2{
+    margin-bottom: 3rem;
+    color: white;
+}
+.contato form{
+    max-width: 70rem;
+    margin: 1rem auto;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+.contato form .input-box{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.contato form .input-box input,
+.contato form textarea{
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border-radius: 0.8rem;
+    border: 2px solid var(--main-color);
+    margin: 1rem 0;
+    resize: none;/*Não deixa a pessoa redimensionar os obejetos*/
+}
+.contato form .btn{
+    margin-top: 2rem;
+}
+ /* Section do rodape */
+.rodape{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 40px 0;
+    background-color: var(--main-color);
+}
+.rodape .social{
+    text-align: center;
+    padding-bottom: 25px;
+    color: black;
+}
+.rodape .social a{
+    font-size: 25px;
+    text-align: center;
+    padding-bottom: 25px;
+    color: black;
+    border: 2px solid black;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 10px;
+    transition: 0.3s ease;
+}
+.rodape .social a:hover{
+    transform: scale(1.2) translateY(-5px);
+    background: black;
+    color: var(--main-color);
+}
+.rodape ul{
+    margin-top: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 0;
+    text-align: center;
+}
+.rodape ul li a{
+    color: black;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s ease;
+}
+.rodape ul li a:hover{
+    border-bottom: 3px solid transparent;
+}
+
+.rodape ul li{
+    display: inline-block;
+    padding: 0 15px;
+}
+
+.rodape .copyright{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: black;
+}
+
+@media(max-width: 1285px){
+    html{
+        font-size: 55%;
+    }
+}
+@media(max-width:991px){
+    .header{
+        padding: 2rem 3%;
+    }
+    section{
+        padding: 10rem 3% 2rem;
+    }
+    .rodape{
+        padding: 2rem 3%;
+    }
+}
